@@ -31,7 +31,7 @@ class VersionCommand(Command):
 setup(
     name='staty',
     version=version,
-    description='HTTP Status codes handling',
+    description='HTTP response and status code handling',
     author="Osvaldo Santana Neto", author_email="staty@osantana.me",
     license="MIT",
     packages=['staty'],
