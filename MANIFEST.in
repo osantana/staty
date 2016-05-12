@@ -1,0 +1,13 @@
+include README.rst
+include LICENSE.txt
+include CHANGES.rst
+include requirements*.txt
+
+global-exclude __pycache__/*
+global-exclude .deps/*
+global-exclude *.so
+global-exclude *.pyd
+global-exclude *.pyc
+global-exclude .git*
+global-exclude .DS_Store
+global-exclude .mailmap
