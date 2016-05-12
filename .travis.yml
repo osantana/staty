@@ -1,0 +1,16 @@
+language: python
+
+sudo: false
+
+matrix:
+  include:
+    - os: linux
+      python: 3.5
+    - os: osx
+      python: 3.5
+
+install:
+  - pip install tox
+
+script:
+  - tox
