@@ -11,8 +11,8 @@ matrix:
       python: 3.5.1
 
 before_install:
-    - [[ "$TRAVIS_OS_NAME" == "osx" ]] && brew update
-    - [[ "$TRAVIS_OS_NAME" == "osx" ]] && brew outdated python3 || brew upgrade python3
+    - [ "$TRAVIS_OS_NAME" == "osx" ] && brew update
+    - [ "$TRAVIS_OS_NAME" == "osx" ] && brew outdated python3 || brew upgrade python3
 
 install:
   - pip install tox
