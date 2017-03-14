@@ -24,11 +24,13 @@ def register(http_status_class):
     code = http_status_class.code
 
     if code in HTTP_STATUS_CODES:
-        raise exceptions.RegistrationError("Status code is already registered")
+        raise exceptions.RegistrationException("Status code is already registered")
 
     HTTP_STATUS_CODES[code] = http_status_class
     if issubclass(http_status_class, base.ErrorCodeMixin):
         HTTP_ERROR_CODES[code] = http_status_class
+
+    return http_status_class
 
 
 @register

@@ -16,9 +16,9 @@
 import pytest
 
 from staty import HTTP_STATUS_CODES
-from staty import register
 from staty import base
 from staty import exceptions
+from staty import register
 
 
 def test_class_names_and_messages():
@@ -54,9 +54,17 @@ def test_exception_response_argument():
         assert exc.response == "response"
 
 
+def test_register_class():
+    class DummyClass(object):
+        code = 999
+
+    registered = register(DummyClass)
+    assert registered == DummyClass
+
+
 def test_cannot_register_twice():
     class DummyClass(object):
         code = 100  # Status code 100 is already registered
 
-    with pytest.raises(exceptions.RegistrationError):
+    with pytest.raises(exceptions.RegistrationException):
         register(DummyClass)

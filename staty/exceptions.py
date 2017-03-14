@@ -13,25 +13,58 @@
 # limitations under the License.
 
 
-class RecoverableErrorMixin(object):
-    pass
-
-
-class UnrecoverableErrorMixin(object):
-    pass
+# noinspection PyPep8Naming
+from socket import timeout as SocketTimeout, gaierror as SocketNameResolutionError, herror as SocketHostError
 
 
 class StatyBaseException(Exception):
     pass
 
 
-class RegistrationError(StatyBaseException):
+class RegistrationException(StatyBaseException):
+    pass
+
+
+class MissingHandlerException(StatyBaseException):
+    pass
+
+
+class RecoverableErrorMixin(Exception):
+    pass
+
+
+class UnrecoverableErrorMixin(Exception):
+    pass
+
+
+class ConnectionException(StatyBaseException):
+    pass
+
+
+class ConnectionTimeoutException(SocketTimeout, ConnectionException, RecoverableErrorMixin):
+    pass
+
+
+class NameResolutionException(SocketNameResolutionError, ConnectionException, RecoverableErrorMixin):
+    pass
+
+
+class HostAddressException(SocketHostError, ConnectionException, RecoverableErrorMixin):
+    pass
+
+
+class SSLException(ConnectionException, RecoverableErrorMixin):
+    pass
+
+
+class ProxyException(ConnectionException, RecoverableErrorMixin):
     pass
 
 
 class HTTPError(StatyBaseException):
-    def __init__(self, response=None):
+    def __init__(self, response=None, request=None):
         self.response = response
+        self.request = request or getattr(response, "request", None)
 
 
 class ClientErrorException(HTTPError, UnrecoverableErrorMixin):
