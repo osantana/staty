@@ -17,7 +17,18 @@
 from socket import timeout as SocketTimeout, gaierror as SocketNameResolutionError, herror as SocketHostError
 
 
+# Base Exceptions & Mixins
+# ========================
+
 class StatyBaseException(Exception):
+    pass
+
+
+class RecoverableErrorMixin(Exception):
+    pass
+
+
+class UnrecoverableErrorMixin(Exception):
     pass
 
 
@@ -29,13 +40,14 @@ class MissingHandlerException(StatyBaseException):
     pass
 
 
-class RecoverableErrorMixin(Exception):
-    pass
+class HTTPError(StatyBaseException):
+    def __init__(self, response=None, request=None):
+        self.response = response
+        self.request = request or getattr(response, "request", None)
 
 
-class UnrecoverableErrorMixin(Exception):
-    pass
-
+# Connection Errors
+# =================
 
 class ConnectionException(StatyBaseException):
     pass
@@ -61,129 +73,185 @@ class ProxyException(ConnectionException, RecoverableErrorMixin):
     pass
 
 
-class HTTPError(StatyBaseException):
-    def __init__(self, response=None, request=None):
-        self.response = response
-        self.request = request or getattr(response, "request", None)
+# HTTP Client Errors
+# ==================
 
-
-class ClientErrorException(HTTPError, UnrecoverableErrorMixin):
+class ClientErrorException(HTTPError):
     pass
 
+
+class RecoverableClientErrorException(ClientErrorException, RecoverableErrorMixin):
+    pass
+
+
+class UnrecoverableClientErrorException(ClientErrorException, UnrecoverableErrorMixin):
+    pass
+
+
+class PreconditionRequiredException(UnrecoverableClientErrorException):
+    pass
+
+
+class TooManyRequestsException(RecoverableClientErrorException):
+    pass
+
+
+class BadRequestException(UnrecoverableClientErrorException):
+    pass
+
+
+class UnauthorizedException(UnrecoverableClientErrorException):
+    pass
+
+
+class PaymentRequiredException(UnrecoverableClientErrorException):
+    pass
+
+
+class ForbiddenException(UnrecoverableClientErrorException):
+    pass
+
+
+class NotFoundException(UnrecoverableClientErrorException):
+    pass
+
+
+class MethodNotAllowedException(UnrecoverableClientErrorException):
+    pass
+
+
+class NotAcceptableException(UnrecoverableClientErrorException):
+    pass
+
+
+class ProxyAuthenticationRequiredException(UnrecoverableClientErrorException):
+    pass
+
+
+class RequestTimeoutException(RecoverableClientErrorException):
+    pass
+
+
+class ConflictException(UnrecoverableClientErrorException):
+    pass
+
+
+class GoneException(UnrecoverableClientErrorException):
+    pass
+
+
+class LengthRequiredException(UnrecoverableClientErrorException):
+    pass
+
+
+class PreconditionFailedException(UnrecoverableClientErrorException):
+    pass
+
+
+class PayloadTooLargeException(UnrecoverableClientErrorException):
+    pass
+
+
+class URITooLongException(UnrecoverableClientErrorException):
+    pass
+
+
+class UnsupportedMediaTypeException(UnrecoverableClientErrorException):
+    pass
+
+
+class RangeNotSatisfiableException(UnrecoverableClientErrorException):
+    pass
+
+
+class ExpectationFailedException(UnrecoverableClientErrorException):
+    pass
+
+
+class IAmATeapotException(UnrecoverableClientErrorException):
+    pass
+
+
+class MisdirectedRequestException(UnrecoverableClientErrorException):
+    pass
+
+
+class UnprocessableEntityException(UnrecoverableClientErrorException):
+    pass
+
+
+class LockedException(UnrecoverableClientErrorException):
+    pass
+
+
+class FailedDependencyException(UnrecoverableClientErrorException):
+    pass
+
+
+class UpgradeRequiredException(UnrecoverableClientErrorException):
+    pass
+
+
+class UnavailableForLegalReasonsException(UnrecoverableClientErrorException):
+    pass
+
+
+class RequestHeaderFieldsTooLargeException(UnrecoverableClientErrorException):
+    pass
+
+
+class MethodFailureException(UnrecoverableClientErrorException):
+    pass
+
+
+class BlockedByWindowsParentalControlsException(UnrecoverableClientErrorException):
+    pass
+
+
+class InvalidTokenException(UnrecoverableClientErrorException):
+    pass
+
+
+class TokenRequiredException(UnrecoverableClientErrorException):
+    pass
+
+
+class RequestHasBeenForbiddenByAntivirusException(UnrecoverableClientErrorException):
+    pass
+
+
+class LoginTimeoutException(RecoverableClientErrorException):
+    pass
+
+
+class RetryWithException(RecoverableClientErrorException):
+    pass
+
+
+class SSLCertificateErrorException(UnrecoverableClientErrorException):
+    pass
+
+
+class SSLCertificateRequiredException(UnrecoverableClientErrorException):
+    pass
+
+
+class HTTPRequestSentToHTTPSPortException(UnrecoverableClientErrorException):
+    pass
+
+
+class NoResponseException(UnrecoverableClientErrorException):
+    pass
+
+
+class ClientClosedRequestException(RecoverableClientErrorException):
+    pass
+
+
+# HTTP Server Errors
+# ==================
 
 class ServerErrorException(HTTPError, RecoverableErrorMixin):
-    pass
-
-
-class PreconditionRequiredException(ClientErrorException):
-    pass
-
-
-class TooManyRequestsException(ClientErrorException):
-    pass
-
-
-class BadRequestException(ClientErrorException):
-    pass
-
-
-class UnauthorizedException(ClientErrorException):
-    pass
-
-
-class PaymentRequiredException(ClientErrorException):
-    pass
-
-
-class ForbiddenException(ClientErrorException):
-    pass
-
-
-class NotFoundException(ClientErrorException):
-    pass
-
-
-class MethodNotAllowedException(ClientErrorException):
-    pass
-
-
-class NotAcceptableException(ClientErrorException):
-    pass
-
-
-class ProxyAuthenticationRequiredException(ClientErrorException):
-    pass
-
-
-class RequestTimeoutException(ClientErrorException):
-    pass
-
-
-class ConflictException(ClientErrorException):
-    pass
-
-
-class GoneException(ClientErrorException):
-    pass
-
-
-class LengthRequiredException(ClientErrorException):
-    pass
-
-
-class PreconditionFailedException(ClientErrorException):
-    pass
-
-
-class PayloadTooLargeException(ClientErrorException):
-    pass
-
-
-class URITooLongException(ClientErrorException):
-    pass
-
-
-class UnsupportedMediaTypeException(ClientErrorException):
-    pass
-
-
-class RangeNotSatisfiableException(ClientErrorException):
-    pass
-
-
-class ExpectationFailedException(ClientErrorException):
-    pass
-
-
-class IAmATeapotException(ClientErrorException):
-    pass
-
-
-class MisdirectedRequestException(ClientErrorException):
-    pass
-
-
-class UnprocessableEntityException(ClientErrorException):
-    pass
-
-
-class LockedException(ClientErrorException):
-    pass
-
-
-class FailedDependencyException(ClientErrorException):
-    pass
-
-
-class UpgradeRequiredException(ClientErrorException):
-    pass
-
-
-class UnavailableForLegalReasonsException(ClientErrorException):
-    pass
-
-
-class RequestHeaderFieldsTooLargeException(ClientErrorException):
     pass
 
 
@@ -231,59 +299,11 @@ class NetworkAuthenticationRequiredException(ServerErrorException):
     pass
 
 
-class MethodFailureException(ClientErrorException):
-    pass
-
-
-class BlockedByWindowsParentalControlsException(ClientErrorException):
-    pass
-
-
-class InvalidTokenException(ClientErrorException):
-    pass
-
-
-class TokenRequiredException(ClientErrorException):
-    pass
-
-
-class RequestHasBeenForbiddenByAntivirusException(ClientErrorException):
-    pass
-
-
 class BandwidthLimitExceededException(ServerErrorException):
     pass
 
 
 class SiteIsFrozenException(ServerErrorException):
-    pass
-
-
-class LoginTimeoutException(ClientErrorException):
-    pass
-
-
-class RetryWithException(ClientErrorException):
-    pass
-
-
-class SSLCertificateErrorException(ClientErrorException):
-    pass
-
-
-class SSLCertificateRequiredException(ClientErrorException):
-    pass
-
-
-class HTTPRequestSentToHTTPSPortException(ClientErrorException):
-    pass
-
-
-class NoResponseException(ClientErrorException):
-    pass
-
-
-class ClientClosedRequestException(ClientErrorException):
     pass
 
 
