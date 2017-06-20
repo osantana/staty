@@ -1,3 +1,8 @@
+0.2.1
+=====
+
+  - Fix CI (travis/tox) errors
+
 0.2
 ===
 

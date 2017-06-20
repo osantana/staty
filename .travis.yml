@@ -1,19 +1,29 @@
 language: python
+
 python:
   - "3.5"
   - "3.6"
-  
+  - "pypy3"
+
 sudo: false
 
 matrix:
   include:
     - os: linux
-      python: 3.5.1
+      python: 3.5
     - os: linux
-      python: 3.6.1
+      python: 3.6
 
 install:
-  - pip install tox
+  - pip install -r requirements-dev.txt
+  - pip install tox-travis
+  - pip install coveralls
+
+before_script:
+  - flake8 --max-line-length=120 .
 
 script:
   - tox
+
+after_success:
+  - coveralls

@@ -1,5 +1,5 @@
 deps:
-	pip install -r requirements.txt
+	pip install -r requirements-dev.txt
 
 tox: deps
 	tox
@@ -16,3 +16,6 @@ release: clean tox
 	git tag `python setup.py -q version`
 	git push origin `python setup.py -q version`
 	python setup.py sdist upload
+
+update-reqs:
+	pip-compile --upgrade requirements-dev.in | uniq > requirements-dev.txt

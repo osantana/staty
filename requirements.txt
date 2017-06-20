@@ -1,4 +1,0 @@
-requests==2.13.0
-pytest==3.0.6
-coverage==4.3.4
-tox==2.6.0
