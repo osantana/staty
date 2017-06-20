@@ -31,10 +31,10 @@ class HTTPStatusMap:
 
     def register(self, http_status_class):
         code = http_status_class.code
-    
+
         if code in self.codes:
             raise exceptions.RegistrationException("Status code is already registered")
-    
+
         self.codes[code] = http_status_class
 
         if issubclass(http_status_class, base.ErrorCodeMixin):
