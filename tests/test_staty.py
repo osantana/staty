@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import mock
 
 import pytest
 
@@ -63,11 +62,15 @@ def test_exception_request_argument():
 
 
 def test_exception_response_request_argument():
-    mock_response = mock.Mock(request="request")
+    class FakeResponse:
+        request= "request"
+
+    fake_response = FakeResponse()
+
     try:
-        raise exceptions.HTTPError(response=mock_response)
+        raise exceptions.HTTPError(response=fake_response)
     except exceptions.HTTPError as exc:
-        assert exc.response == mock_response
+        assert exc.response == fake_response
         assert exc.request == "request"
 
 
