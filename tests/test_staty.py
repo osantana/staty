@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from unittest import mock
 
 import pytest
 
@@ -49,9 +50,25 @@ def test_exception_class_names():
 
 def test_exception_response_argument():
     try:
-        raise exceptions.HTTPError("response")
+        raise exceptions.HTTPError(response="response")
     except exceptions.HTTPError as exc:
         assert exc.response == "response"
+
+
+def test_exception_request_argument():
+    try:
+        raise exceptions.HTTPError(request="request")
+    except exceptions.HTTPError as exc:
+        assert exc.request == "request"
+
+
+def test_exception_response_request_argument():
+    mock_response = mock.Mock(request="request")
+    try:
+        raise exceptions.HTTPError(response=mock_response)
+    except exceptions.HTTPError as exc:
+        assert exc.response == mock_response
+        assert exc.request == "request"
 
 
 def test_register_class():
