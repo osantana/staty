@@ -63,7 +63,7 @@ def test_exception_request_argument():
 
 def test_exception_response_request_argument():
     class FakeResponse:
-        request= "request"
+        request = "request"
 
     fake_response = FakeResponse()
 
