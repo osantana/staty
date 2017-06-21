@@ -41,12 +41,12 @@ class MissingHandlerException(StatyBaseException):
 
 
 class HTTPError(StatyBaseException):
-    def __init__(self, *args, **kwargs):
-        self.response = kwargs.pop("response", None)
-        self.request = kwargs.pop("request", None)
+    def __init__(self, *args, response=None, request=None):
+        self.response = response
+        self.request = request
         if self.request is None and self.response is not None:
             self.request = getattr(self.response, "request", None)
-        super().__init__(*args, **kwargs)
+        super().__init__(*args)
 
 
 # Connection Errors
