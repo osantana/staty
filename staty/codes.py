@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+import re
+
 from . import base
 from . import exceptions
 
@@ -40,7 +42,7 @@ class HTTPStatusMap:
         if issubclass(http_status_class, base.ErrorCodeMixin):
             self.errors[code] = http_status_class
 
-        status_name = "HTTP_{}_{}".format(code, "_".join(http_status_class.message.replace("-", " ").split()).upper())
+        status_name = "HTTP_{}_{}".format(code, re.sub(r"[ -]", "_", http_status_class.message).upper())
         self.attribute_names[status_name] = http_status_class()
 
         return http_status_class
