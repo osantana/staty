@@ -1,3 +1,8 @@
+0.2.2
+=====
+
+  - Small refactoring in HTTPError class implementation
+
 0.2.1
 =====
 
