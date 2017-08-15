@@ -17,7 +17,7 @@ import warnings
 from functools import wraps
 
 from .. import exceptions
-from ..codes import status
+from staty import status
 
 try:
     from requests import exceptions as request_exceptions

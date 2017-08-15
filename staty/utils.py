@@ -12,7 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .base import *  # noqa: F403,F401
-from .codes import *  # noqa: F403,F401
-from .exceptions import *  # noqa: F403,F401
-from .status_map import status  # noqa: F403,F401
+
+import re
+
+
+def camel2snake(name, upper=False):
+    name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+    name = re.sub('([a-z0-9])([A-Z])', r'\1_\2', name)
+    return name.upper() if upper else name.lower()

@@ -15,9 +15,8 @@
 
 import pytest
 
-from staty import base, InternalServerError
+from staty import base, InternalServerError, status
 from staty import exceptions
-from staty import status
 
 
 def test_class_names_and_messages():

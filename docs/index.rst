@@ -9,6 +9,8 @@ response status codes.
 .. toctree::
    :maxdepth: 2
 
+   status_map
    codes
    exceptions
+
    changelog

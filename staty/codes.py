@@ -13,42 +13,9 @@
 # limitations under the License.
 
 
-import re
-
 from . import base
 from . import exceptions
-
-
-class HTTPStatusMap:
-    def __init__(self):
-        self.codes = {}
-        self.errors = {}
-        self.attribute_names = {}
-
-    def __getattr__(self, item):
-        try:
-            return self.attribute_names[item]
-        except KeyError as exc:
-            raise AttributeError("{!r} object has no attribute {!r}".format(self.__class__.__name__, item)) from exc
-
-    def register(self, http_status_class):
-        code = http_status_class.code
-
-        if code in self.codes:
-            raise exceptions.RegistrationException("Status code is already registered")
-
-        self.codes[code] = http_status_class
-
-        if issubclass(http_status_class, base.ErrorCodeMixin):
-            self.errors[code] = http_status_class
-
-        status_name = "HTTP_{}_{}".format(code, re.sub(r"[ -]", "_", http_status_class.message).upper())
-        self.attribute_names[status_name] = http_status_class()
-
-        return http_status_class
-
-
-status = HTTPStatusMap()
+from .status_map import status
 
 
 @status.register
