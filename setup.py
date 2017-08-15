@@ -23,7 +23,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 setup(
     name='staty',
-    version='0.3.1',
+    version='0.4.0',
     description='HTTP response and status code handling',
     author="Osvaldo Santana Neto", author_email="staty@osantana.me",
     license="MIT",
