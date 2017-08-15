@@ -19,11 +19,11 @@ import re
 from setuptools import setup, Command
 
 here = os.path.abspath(os.path.dirname(__file__))
-
+version='0.4.0'
 
 setup(
     name='staty',
-    version='0.4.0',
+    version=version,
     description='HTTP response and status code handling',
     author="Osvaldo Santana Neto", author_email="staty@osantana.me",
     license="MIT",
