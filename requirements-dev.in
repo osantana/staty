@@ -1,4 +1,5 @@
 pip-tools
+bumpversion
 requests
 pytest
 pytest-cov
