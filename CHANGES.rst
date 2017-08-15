@@ -1,3 +1,8 @@
+0.3.0
+=====
+
+  - Add RFC references when available.
+
 0.2.2
 =====
 
