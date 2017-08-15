@@ -4,6 +4,7 @@
   - Remove HTTP statuses global maps
   - Create global StatusMap registry with constant attributes support
   - Add support for HTTP code comparison with integers, strings, HTTP classes, etc
+  - Improve documentation organization, presentation and formatting
 
 0.4.3
 -----
