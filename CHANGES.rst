@@ -1,3 +1,8 @@
+0.3.1
+=====
+
+  - Fix SwitchProxy class message
+
 0.3.0
 =====
 
