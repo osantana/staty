@@ -61,6 +61,15 @@ class AbstractStatus(object):
     category_range = None
     rfcs = ()
 
+    def __eq__(self, other):
+        if isinstance(other, int):
+            return self.code == other
+        elif isinstance(other, str):
+            return self.message.lower() == other.lower()
+        elif not isinstance(other, AbstractStatus) and issubclass(other, AbstractStatus):
+            return isinstance(self, other)
+        return super().__eq__(other)
+
 
 class Informational(AbstractStatus):
     category_code = "1xx"

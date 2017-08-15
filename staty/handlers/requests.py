@@ -17,7 +17,7 @@ import warnings
 from functools import wraps
 
 from .. import exceptions
-from ..codes import HTTP_ERROR_CODES
+from ..codes import status
 
 try:
     from requests import exceptions as request_exceptions
@@ -27,8 +27,8 @@ except ImportError:
 
 
 def raise_for_status(response):
-    if response.status_code in HTTP_ERROR_CODES:
-        status_class = HTTP_ERROR_CODES[response.status_code]
+    if response.status_code in status.errors:
+        status_class = status.errors[response.status_code]
         raise status_class.exception(response=response)
 
     return response

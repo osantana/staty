@@ -15,16 +15,15 @@
 
 import pytest
 
-from staty import HTTP_STATUS_CODES
-from staty import base
+from staty import base, InternalServerError
 from staty import exceptions
-from staty import register
+from staty import status
 
 
 def test_class_names_and_messages():
-    for status in HTTP_STATUS_CODES.values():
-        message = status.message.replace(" ", "").replace("-", "").lower()
-        assert status.__name__.lower() == message
+    for status_class in status.codes.values():
+        message = status_class.message.replace(" ", "").replace("-", "").lower()
+        assert status_class.__name__.lower() == message
 
 
 @pytest.mark.parametrize("category_class,quantity", [
@@ -35,12 +34,12 @@ def test_class_names_and_messages():
     (base.ServerError, 19),
 ])
 def test_status_in_categories(category_class, quantity):
-    statuses = [s for s in HTTP_STATUS_CODES.values() if issubclass(s, category_class)]
+    statuses = [s for s in status.codes.values() if issubclass(s, category_class)]
     assert len(statuses) == quantity
 
 
 def test_exception_class_names():
-    for http_status in HTTP_STATUS_CODES.values():
+    for http_status in status.codes.values():
         if not hasattr(http_status, "exception"):
             continue
 
@@ -77,8 +76,9 @@ def test_exception_response_request_argument():
 def test_register_class():
     class DummyClass(object):
         code = 999
+        message = "Dummy Class"
 
-    registered = register(DummyClass)
+    registered = status.register(DummyClass)
     assert registered == DummyClass
 
 
@@ -87,4 +87,11 @@ def test_cannot_register_twice():
         code = 100  # Status code 100 is already registered
 
     with pytest.raises(exceptions.RegistrationException):
-        register(DummyClass)
+        status.register(DummyClass)
+
+
+def test_registered_attributes_in_status_map():
+    assert status.HTTP_200_OK == 200
+    assert status.HTTP_404_NOT_FOUND == "not found"
+    assert status.HTTP_500_INTERNAL_SERVER_ERROR == InternalServerError
+    assert status.HTTP_304_NOT_MODIFIED == status.HTTP_304_NOT_MODIFIED
