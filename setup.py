@@ -19,7 +19,7 @@ import re
 from setuptools import setup, Command
 
 here = os.path.abspath(os.path.dirname(__file__))
-version='0.4.1'
+version='0.4.2'
 
 setup(
     name='staty',
