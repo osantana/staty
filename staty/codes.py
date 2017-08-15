@@ -214,7 +214,7 @@ class UseProxy(base.Redirection, base.HTTP11Mixin):
 @register
 class SwitchProxy(base.Redirection, base.HTTP11Mixin):
     code = 306
-    message = "Switch Proxy (Unused)"
+    message = "Switch Proxy"  # Unused
     rfcs = (
         ("7231", "6.4.6"),
         ("draft", "1.2"),
