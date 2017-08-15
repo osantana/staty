@@ -45,7 +45,6 @@ setup(
     ],
     url='http://github.com/osantana/staty',
     download_url='https://github.com/osantana/staty/tarball/{}'.format(version),
-    cmdclass={'version': VersionCommand},
     test_suite="tests",
     extras_require={
         'requests': ["requests"],
