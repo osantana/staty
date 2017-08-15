@@ -1,3 +1,10 @@
+0.4.0
+-----
+
+  - Add initial documentation
+  - Update dev requirements
+  - Configure bumpversion for library release
+
 0.3.1
 -----
 
