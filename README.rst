@@ -11,7 +11,7 @@ response status codes.
 Documentation
 -------------
 
-You can find ``prettyconf`` documentation at `Read the Docs`_ website.
+You can find ``staty`` documentation at `Read the Docs`_ website.
 
 
 .. _`Read the Docs`: http://staty.readthedocs.org/
