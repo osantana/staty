@@ -37,18 +37,27 @@ def register(http_status_class):
 class Continue(base.Informational, base.HTTP11Mixin):
     code = 100
     message = "Continue"
+    rfcs = (
+        ("7231", "6.2.1"),
+    )
 
 
 @register
 class SwitchingProtocols(base.Informational, base.HTTP11Mixin):
     code = 101
     message = "Switching Protocols"
+    rfcs = (
+        ("7231", "6.2.2"),
+    )
 
 
 @register
 class Processing(base.Informational, base.WebDAVMixin):
     code = 102
     message = "Processing"
+    rfcs = (
+        ("2518", ""),
+    )
 
 
 @register
@@ -62,114 +71,172 @@ class Checkpoint(base.Informational, base.UnofficialMixin):
 class Ok(base.Successful, base.HTTP10Mixin):
     code = 200
     message = "OK"
+    rfcs = (
+        ("7231", "6.3.1"),
+    )
 
 
 @register
 class Created(base.Successful, base.HTTP10Mixin):
     code = 201
     message = "Created"
+    rfcs = (
+        ("7231", "6.3.2"),
+    )
 
 
 @register
 class Accepted(base.Successful, base.HTTP10Mixin):
     code = 202
     message = "Accepted"
+    rfcs = (
+        ("7231", "6.3.3"),
+    )
 
 
 @register
 class NonAuthoritativeInformation(base.Successful, base.HTTP11Mixin):
     code = 203
     message = "Non-Authoritative Information"
+    rfcs = (
+        ("7231", "6.3.4"),
+    )
 
 
 @register
 class NoContent(base.Successful, base.HTTP10Mixin):
     code = 204
     message = "No Content"
+    rfcs = (
+        ("7231", "6.3.5"),
+    )
 
 
 @register
 class ResetContent(base.Successful, base.HTTP11Mixin):
     code = 205
     message = "Reset Content"
+    rfcs = (
+        ("7231", "6.3.6"),
+    )
 
 
 @register
 class PartialContent(base.Successful, base.HTTP11Mixin):
     code = 206
     message = "Partial Content"
+    rfcs = (
+        ("7233", "4.1"),
+    )
 
 
 @register
 class MultiStatus(base.Successful, base.WebDAVMixin):
     code = 207
     message = "Multi-Status"
+    rfcs = (
+        ("4918", ""),
+    )
 
 
 @register
 class AlreadyReported(base.Successful, base.WebDAVMixin):
     code = 208
     message = "Already Reported"
+    rfcs = (
+        ("5842", ""),
+    )
 
 
 @register
 class IMUsed(base.Successful, base.HTTP11Mixin):
     code = 226
     message = "IM Used"
+    rfcs = (
+        ("3229", ""),
+    )
 
 
 @register
 class MultipleChoices(base.Redirection, base.HTTP10Mixin):
     code = 300
     message = "Multiple Choices"
+    rfcs = (
+        ("7231", "6.4.1"),
+    )
 
 
 @register
 class MovedPermanently(base.Redirection, base.HTTP10Mixin):
     code = 301
     message = "Moved Permanently"
+    rfcs = (
+        ("7231", "6.4.2"),
+    )
 
 
 @register
 class Found(base.Redirection, base.HTTP11Mixin):
     code = 302
     message = "Found"
+    rfcs = (
+        ("7231", "6.4.3"),
+    )
 
 
 @register
 class SeeOther(base.Redirection, base.HTTP11Mixin):
     code = 303
     message = "See Other"
+    rfcs = (
+        ("7231", "6.4.4"),
+    )
 
 
 @register
 class NotModified(base.Redirection, base.HTTP11Mixin):
     code = 304
     message = "Not Modified"
+    rfcs = (
+        ("7232", "4.1"),
+    )
 
 
 @register
 class UseProxy(base.Redirection, base.HTTP11Mixin):
     code = 305
     message = "Use Proxy"
+    rfcs = (
+        ("7231", "6.4.5"),
+    )
 
 
 @register
 class SwitchProxy(base.Redirection, base.HTTP11Mixin):
     code = 306
-    message = "Switch Proxy"
+    message = "Switch Proxy (Unused)"
+    rfcs = (
+        ("7231", "6.4.6"),
+        ("draft", "1.2"),
+    )
 
 
 @register
 class TemporaryRedirect(base.Redirection, base.HTTP11Mixin):
     code = 307
     message = "Temporary Redirect"
+    rfcs = (
+        ("7231", "6.4.7"),
+    )
 
 
 @register
 class PermanentRedirect(base.Redirection, base.HTTP11Mixin):
     code = 308
     message = "Permanent Redirect"
+    rfcs = (
+        ("7538", ""),
+    )
 
 
 @register
@@ -177,6 +244,9 @@ class BadRequest(base.ClientError, base.HTTP10Mixin):
     code = 400
     message = "Bad Request"
     exception = exceptions.BadRequestException
+    rfcs = (
+        ("7231", "6.5.1"),
+    )
 
 
 @register
@@ -184,6 +254,9 @@ class Unauthorized(base.ClientError, base.HTTP10Mixin):
     code = 401
     message = "Unauthorized"
     exception = exceptions.UnauthorizedException
+    rfcs = (
+        ("7235", "3.1"),
+    )
 
 
 @register
@@ -191,6 +264,9 @@ class PaymentRequired(base.ClientError, base.HTTP10Mixin):
     code = 402
     message = "Payment Required"
     exception = exceptions.PaymentRequiredException
+    rfcs = (
+        ("7231", "6.5.2"),
+    )
 
 
 @register
@@ -198,6 +274,9 @@ class Forbidden(base.ClientError, base.HTTP10Mixin):
     code = 403
     message = "Forbidden"
     exception = exceptions.ForbiddenException
+    rfcs = (
+        ("7231", "6.5.3"),
+    )
 
 
 @register
@@ -205,6 +284,9 @@ class NotFound(base.ClientError, base.HTTP10Mixin):
     code = 404
     message = "Not Found"
     exception = exceptions.NotFoundException
+    rfcs = (
+        ("7231", "6.5.4"),
+    )
 
 
 @register
@@ -212,6 +294,9 @@ class MethodNotAllowed(base.ClientError, base.HTTP11Mixin):
     code = 405
     message = "Method Not Allowed"
     exception = exceptions.MethodNotAllowedException
+    rfcs = (
+        ("7231", "6.5.5"),
+    )
 
 
 @register
@@ -219,6 +304,9 @@ class NotAcceptable(base.ClientError, base.HTTP11Mixin):
     code = 406
     message = "Not Acceptable"
     exception = exceptions.NotAcceptableException
+    rfcs = (
+        ("7231", "6.5.6"),
+    )
 
 
 @register
@@ -226,6 +314,9 @@ class ProxyAuthenticationRequired(base.ClientError, base.HTTP11Mixin):
     code = 407
     message = "Proxy Authentication Required"
     exception = exceptions.ProxyAuthenticationRequiredException
+    rfcs = (
+        ("7235", "3.2"),
+    )
 
 
 @register
@@ -233,6 +324,9 @@ class RequestTimeout(base.ClientError, base.HTTP11Mixin):
     code = 408
     message = "Request Timeout"
     exception = exceptions.RequestTimeoutException
+    rfcs = (
+        ("7231", "6.5.7"),
+    )
 
 
 @register
@@ -240,6 +334,9 @@ class Conflict(base.ClientError, base.HTTP11Mixin):
     code = 409
     message = "Conflict"
     exception = exceptions.ConflictException
+    rfcs = (
+        ("7231", "6.5.8"),
+    )
 
 
 @register
@@ -247,6 +344,9 @@ class Gone(base.ClientError, base.HTTP11Mixin):
     code = 410
     message = "Gone"
     exception = exceptions.GoneException
+    rfcs = (
+        ("7231", "6.5.9"),
+    )
 
 
 @register
@@ -254,6 +354,9 @@ class LengthRequired(base.ClientError, base.HTTP11Mixin):
     code = 411
     message = "Length Required"
     exception = exceptions.LengthRequiredException
+    rfcs = (
+        ("7231", "6.5.10"),
+    )
 
 
 @register
@@ -261,6 +364,10 @@ class PreconditionFailed(base.ClientError, base.HTTP11Mixin):
     code = 412
     message = "Precondition Failed"
     exception = exceptions.PreconditionFailedException
+    rfcs = (
+        ("7232", "4.2"),
+        ("8144", "3.2"),
+    )
 
 
 @register
@@ -268,6 +375,9 @@ class PayloadTooLarge(base.ClientError, base.HTTP11Mixin):
     code = 413
     message = "Payload Too Large"
     exception = exceptions.PayloadTooLargeException
+    rfcs = (
+        ("7231", "6.5.11"),
+    )
 
 
 @register
@@ -275,6 +385,9 @@ class URITooLong(base.ClientError, base.HTTP11Mixin):
     code = 414
     message = "URI Too Long"
     exception = exceptions.URITooLongException
+    rfcs = (
+        ("7231", "6.5.12"),
+    )
 
 
 @register
@@ -282,6 +395,10 @@ class UnsupportedMediaType(base.ClientError, base.HTTP11Mixin):
     code = 415
     message = "Unsupported Media Type"
     exception = exceptions.UnsupportedMediaTypeException
+    rfcs = (
+        ("7231", "6.5.13"),
+        ("7694", "3"),
+    )
 
 
 @register
@@ -289,6 +406,9 @@ class RangeNotSatisfiable(base.ClientError, base.HTTP11Mixin):
     code = 416
     message = "Range Not Satisfiable"
     exception = exceptions.RangeNotSatisfiableException
+    rfcs = (
+        ("7233", "4.4"),
+    )
 
 
 @register
@@ -296,6 +416,9 @@ class ExpectationFailed(base.ClientError, base.HTTP11Mixin):
     code = 417
     message = "Expectation Failed"
     exception = exceptions.ExpectationFailedException
+    rfcs = (
+        ("7231", "6.5.14"),
+    )
 
 
 @register
@@ -318,6 +441,9 @@ class MisdirectedRequest(base.ClientError, base.HTTP20Mixin):
     code = 421
     message = "Misdirected Request"
     exception = exceptions.MisdirectedRequestException
+    rfcs = (
+        ("7540", "9.1.2"),
+    )
 
 
 @register
@@ -325,6 +451,9 @@ class UnprocessableEntity(base.ClientError, base.WebDAVMixin):
     code = 422
     message = "Unprocessable Entity"
     exception = exceptions.UnprocessableEntityException
+    rfcs = (
+        ("4918", ""),
+    )
 
 
 @register
@@ -332,6 +461,9 @@ class Locked(base.ClientError, base.WebDAVMixin):
     code = 423
     message = "Locked"
     exception = exceptions.LockedException
+    rfcs = (
+        ("4918", ""),
+    )
 
 
 @register
@@ -339,6 +471,9 @@ class FailedDependency(base.ClientError, base.WebDAVMixin):
     code = 424
     message = "Failed Dependency"
     exception = exceptions.FailedDependencyException
+    rfcs = (
+        ("4918", ""),
+    )
 
 
 @register
@@ -346,6 +481,9 @@ class UpgradeRequired(base.ClientError, base.HTTP11Mixin):
     code = 426
     message = "Upgrade Required"
     exception = exceptions.UpgradeRequiredException
+    rfcs = (
+        ("7231", "6.5.15"),
+    )
 
 
 @register
@@ -353,6 +491,9 @@ class PreconditionRequired(base.ClientError, base.HTTP11Mixin):
     code = 428
     message = "Precondition Required"
     exception = exceptions.PreconditionRequiredException
+    rfcs = (
+        ("6585", ""),
+    )
 
 
 @register
@@ -360,6 +501,9 @@ class TooManyRequests(base.ClientError, base.HTTP11Mixin):
     code = 429
     message = "Too Many Requests"
     exception = exceptions.TooManyRequestsException
+    rfcs = (
+        ("6585", ""),
+    )
 
 
 @register
@@ -367,6 +511,9 @@ class RequestHeaderFieldsTooLarge(base.ClientError, base.HTTP11Mixin):
     code = 431
     message = "Request Header Fields Too Large"
     exception = exceptions.RequestHeaderFieldsTooLargeException
+    rfcs = (
+        ("6585", ""),
+    )
 
 
 @register
@@ -403,6 +550,9 @@ class UnavailableForLegalReasons(base.ClientError, base.HTTP11Mixin):
     code = 451
     message = "Unavailable For Legal Reasons"
     exception = exceptions.UnavailableForLegalReasonsException
+    rfcs = (
+        ("7725", ""),
+    )
 
 
 class Redirect(base.ClientError, base.IISMixin):
@@ -466,6 +616,9 @@ class InternalServerError(base.ServerError, base.HTTP10Mixin):
     code = 500
     message = "Internal Server Error"
     exception = exceptions.InternalServerErrorException
+    rfcs = (
+        ("7231", "6.6.1"),
+    )
 
 
 # noinspection PyShadowingBuiltins
@@ -474,6 +627,9 @@ class NotImplemented(base.ServerError, base.HTTP10Mixin):
     code = 501
     message = "Not Implemented"
     exception = exceptions.NotImplementedException
+    rfcs = (
+        ("7231", "6.6.2"),
+    )
 
 
 @register
@@ -481,6 +637,9 @@ class BadGateway(base.ServerError, base.HTTP10Mixin):
     code = 502
     message = "Bad Gateway"
     exception = exceptions.BadGatewayException
+    rfcs = (
+        ("7231", "6.6.3"),
+    )
 
 
 @register
@@ -488,6 +647,9 @@ class ServiceUnavailable(base.ServerError, base.HTTP10Mixin):
     code = 503
     message = "Service Unavailable"
     exception = exceptions.ServiceUnavailableException
+    rfcs = (
+        ("7231", "6.6.4"),
+    )
 
 
 @register
@@ -495,6 +657,9 @@ class GatewayTimeout(base.ServerError, base.HTTP11Mixin):
     code = 504
     message = "Gateway Timeout"
     exception = exceptions.GatewayTimeoutException
+    rfcs = (
+        ("7231", "6.6.5"),
+    )
 
 
 @register
@@ -502,6 +667,9 @@ class HTTPVersionNotSupported(base.ServerError, base.HTTP11Mixin):
     code = 505
     message = "HTTP Version Not Supported"
     exception = exceptions.HTTPVersionNotSupportedException
+    rfcs = (
+        ("7231", "6.6.6"),
+    )
 
 
 @register
@@ -509,6 +677,9 @@ class VariantAlsoNegotiates(base.ServerError, base.HTTP11Mixin):
     code = 506
     message = "Variant Also Negotiates"
     exception = exceptions.VariantAlsoNegotiatesException
+    rfcs = (
+        ("2295", ""),
+    )
 
 
 @register
@@ -516,6 +687,9 @@ class InsufficientStorage(base.ServerError, base.WebDAVMixin):
     code = 507
     message = "Insufficient Storage"
     exception = exceptions.InsufficientStorageException
+    rfcs = (
+        ("4918", ""),
+    )
 
 
 @register
@@ -523,6 +697,9 @@ class LoopDetected(base.ServerError, base.WebDAVMixin):
     code = 508
     message = "Loop Detected"
     exception = exceptions.LoopDetectedException
+    rfcs = (
+        ("5842", ""),
+    )
 
 
 class BandwidthLimitExceeded(base.ServerError, base.UnofficialMixin):
@@ -537,6 +714,9 @@ class NotExtended(base.ServerError, base.HTTP11Mixin):
     code = 510
     message = "Not Extended"
     exception = exceptions.NotExtendedException
+    rfcs = (
+        ("2774", ""),
+    )
 
 
 @register
@@ -544,6 +724,9 @@ class NetworkAuthenticationRequired(base.ServerError, base.HTTP11Mixin):
     code = 511
     message = "Network Authentication Required"
     exception = exceptions.NetworkAuthenticationRequiredException
+    rfcs = (
+        ("6585", ""),
+    )
 
 
 @register

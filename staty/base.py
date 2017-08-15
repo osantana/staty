@@ -59,6 +59,7 @@ class AbstractStatus(object):
     category_code = ""
     category_name = ""
     category_range = None
+    rfcs = ()
 
 
 class Informational(AbstractStatus):
