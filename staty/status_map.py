@@ -29,6 +29,9 @@ class HTTPStatusMap:
         except KeyError as exc:
             raise AttributeError("{!r} object has no attribute {!r}".format(self.__class__.__name__, item)) from exc
 
+    def __getitem__(self, item):
+            return self.codes[item]
+
     def register(self, http_status_class):
         code = http_status_class.code
         name = http_status_class.__name__
@@ -36,15 +39,16 @@ class HTTPStatusMap:
         if code in self.codes:
             raise exceptions.RegistrationException("Status code is already registered")
 
-        self.codes[code] = http_status_class
+        http_status = http_status_class()
+        self.codes[code] = http_status
 
         if issubclass(http_status_class, base.ErrorCodeMixin):
-            self.errors[code] = http_status_class
+            self.errors[code] = http_status
 
         name = camel2snake(name, upper=True)
 
         status_name = "HTTP_{}_{}".format(code, name)
-        self.attribute_names[status_name] = http_status_class()
+        self.attribute_names[status_name] = http_status
 
         return http_status_class
 

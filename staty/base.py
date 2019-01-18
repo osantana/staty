@@ -66,9 +66,14 @@ class AbstractStatus(object):
             return self.code == other
         elif isinstance(other, str):
             return self.message.lower() == other.lower()
+        elif isinstance(other, AbstractStatus):
+            return self.code == other.code
         elif not isinstance(other, AbstractStatus) and issubclass(other, AbstractStatus):
             return isinstance(self, other)
         return super().__eq__(other)
+
+    def __str__(self):
+        return f"{self.code} {self.message}"
 
 
 class Informational(AbstractStatus):

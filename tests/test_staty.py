@@ -15,14 +15,13 @@
 
 import pytest
 
-from staty import base, InternalServerError, status
-from staty import exceptions
+from staty import InternalServerError, Ok, base, exceptions, status
 
 
 def test_class_names_and_messages():
-    for status_class in status.codes.values():
-        message = status_class.message.replace(" ", "").replace("-", "").lower()
-        assert status_class.__name__.lower() == message
+    for st in status.codes.values():
+        message = st.message.replace(" ", "").replace("-", "").lower()
+        assert st.__class__.__name__.lower() == message
 
 
 @pytest.mark.parametrize("category_class,quantity", [
@@ -33,8 +32,14 @@ def test_class_names_and_messages():
     (base.ServerError, 19),
 ])
 def test_status_in_categories(category_class, quantity):
-    statuses = [s for s in status.codes.values() if issubclass(s, category_class)]
+    statuses = [s for s in status.codes.values() if isinstance(s, category_class)]
     assert len(statuses) == quantity
+
+
+def test_status_instance():
+    ok = Ok()
+    assert str(ok) == "200 OK"
+    assert ok == 200
 
 
 def test_exception_class_names():
@@ -42,7 +47,7 @@ def test_exception_class_names():
         if not hasattr(http_status, "exception"):
             continue
 
-        assert "{}Exception".format(http_status.__name__) == http_status.exception.__name__
+        assert "{}Exception".format(http_status.__class__.__name__) == http_status.exception.__name__
 
 
 def test_exception_response_argument():
@@ -73,7 +78,7 @@ def test_exception_response_request_argument():
 
 
 def test_register_class():
-    class DummyClass(object):
+    class DummyClass:
         code = 999
         message = "Dummy Class"
 
