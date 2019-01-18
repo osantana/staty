@@ -9,3 +9,4 @@ flake8
 sphinx
 sphinx-autobuild
 sphinx-rtd-theme
+twine
