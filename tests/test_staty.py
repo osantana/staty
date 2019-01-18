@@ -15,7 +15,7 @@
 
 import pytest
 
-from staty import InternalServerError, Ok, base, exceptions, status
+from staty import InternalServerError, Ok, base, exceptions, status, BadRequest
 
 
 def test_class_names_and_messages():
@@ -96,6 +96,16 @@ def test_cannot_register_twice():
 
 def test_registered_attributes_in_status_map():
     assert status.HTTP_200_OK == 200
+    assert status.HTTP_400_BAD_REQUEST == BadRequest()
     assert status.HTTP_404_NOT_FOUND == "not found"
     assert status.HTTP_500_INTERNAL_SERVER_ERROR == InternalServerError
     assert status.HTTP_304_NOT_MODIFIED == status.HTTP_304_NOT_MODIFIED
+
+    assert status[200] == 200
+    assert status[400] == BadRequest()
+    assert status[404] == "not found"
+    assert status[500] == InternalServerError
+    assert status[304] == status.HTTP_304_NOT_MODIFIED
+
+    assert status[200] != []
+    assert status[200] != ["invalid comparison"]

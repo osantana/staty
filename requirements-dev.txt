@@ -27,15 +27,15 @@ more-itertools==5.0.0     # via pytest
 packaging==18.0           # via sphinx
 pathtools==0.1.2          # via sphinx-autobuild, watchdog
 pip-tools==3.2.0
-pluggy==0.8.0             # via pytest, tox
+pluggy==0.8.1             # via pytest, tox
 port_for==0.3.1           # via sphinx-autobuild
 py==1.7.0                 # via pytest, tox
 pycodestyle==2.4.0        # via flake8
 pyflakes==2.0.0           # via flake8
 pygments==2.3.1           # via sphinx
-pyparsing==2.3.0          # via packaging
+pyparsing==2.3.1          # via packaging
 pytest-cov==2.6.1
-pytest==4.1.0
+pytest==4.1.1
 pytz==2018.9              # via babel
 pyyaml==3.13              # via sphinx-autobuild, watchdog
 requests==2.21.0
@@ -47,7 +47,7 @@ sphinx==1.8.3
 sphinxcontrib-websupport==1.1.0  # via sphinx
 toml==0.10.0              # via tox
 tornado==5.1.1            # via livereload, sphinx-autobuild
-tox==3.6.1
+tox==3.7.0
 urllib3==1.24.1           # via requests
 virtualenv==16.2.0        # via tox
 watchdog==0.9.0           # via sphinx-autobuild

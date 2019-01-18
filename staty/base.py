@@ -53,7 +53,11 @@ class ErrorCodeMixin(object):
     exception = None
 
 
-class AbstractStatus(object):
+class StatusType(type):
+    pass
+
+
+class AbstractStatus(metaclass=StatusType):
     code = None
     message = ""
     category_code = ""
@@ -62,14 +66,21 @@ class AbstractStatus(object):
     rfcs = ()
 
     def __eq__(self, other):
+        if not other:
+            return False
+
         if isinstance(other, int):
             return self.code == other
-        elif isinstance(other, str):
+
+        if isinstance(other, str):
             return self.message.lower() == other.lower()
-        elif isinstance(other, AbstractStatus):
+
+        if isinstance(other, AbstractStatus):
             return self.code == other.code
-        elif not isinstance(other, AbstractStatus) and issubclass(other, AbstractStatus):
+
+        if isinstance(other, StatusType):
             return isinstance(self, other)
+
         return super().__eq__(other)
 
     def __str__(self):
