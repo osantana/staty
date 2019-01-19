@@ -18,7 +18,7 @@ import os
 from setuptools import setup
 
 here = os.path.abspath(os.path.dirname(__file__))
-version = '1.0.0'
+version = '1.1.0'
 
 setup(
     name='staty',
