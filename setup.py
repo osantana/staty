@@ -13,23 +13,24 @@
 # limitations under the License.
 
 
-import os
 import re
 
-from setuptools import setup, Command
+from setuptools import Command, setup
 
 
 def get_readme():
     with open("README.rst") as readme:
         return readme.read()
 
+
+# noinspection PyShadowingNames
 def get_version():
     version = "0.0.0"
 
     with open("CHANGES.rst") as changes:
         for line in changes:
             version = line.strip()
-            if re.search('^[0-9]+\.[0-9]+(\.[0-9]+)?$', version):
+            if re.search(r'^[0-9]+\.[0-9]+(\.[0-9]+)?$', version):
                 break
 
     return version
@@ -49,7 +50,6 @@ class VersionCommand(Command):
 
 
 version = get_version()
-
 
 setup(
     name='staty',
@@ -76,7 +76,7 @@ setup(
         'Topic :: Software Development :: Libraries',
     ],
     url='http://github.com/osantana/staty',
-    download_url='https://github.com/osantana/staty/tarball/{}'.format(version),
+    download_url=f'https://github.com/osantana/staty/tarball/{version}',
     test_suite="tests",
     extras_require={
         'requests': ["requests"],
