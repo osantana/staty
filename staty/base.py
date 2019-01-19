@@ -87,31 +87,35 @@ class AbstractStatus(metaclass=StatusType):
         return f"{self.code} {self.message}"
 
 
-class Informational(AbstractStatus):
+class HTTPStatus(AbstractStatus):
+    pass
+
+
+class Informational(HTTPStatus):
     category_code = "1xx"
     category_name = "Informational"
     category_range = 100, 200
 
 
-class Successful(AbstractStatus):
+class Successful(HTTPStatus):
     category_code = "2xx"
     category_name = "Successful"
     category_range = 200, 300
 
 
-class Redirection(AbstractStatus):
+class Redirection(HTTPStatus):
     category_code = "3xx"
     category_name = "Redirection"
     category_range = 300, 400
 
 
-class ClientError(AbstractStatus, ErrorCodeMixin):
+class ClientError(HTTPStatus, ErrorCodeMixin):
     category_code = "4xx"
     category_name = "Client Error"
     category_range = 400, 500
 
 
-class ServerError(AbstractStatus, ErrorCodeMixin):
+class ServerError(HTTPStatus, ErrorCodeMixin):
     category_code = "5xx"
     category_name = "Server Error"
     category_range = 500, 600
