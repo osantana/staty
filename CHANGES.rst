@@ -3,7 +3,7 @@
 
   - Replace bumpversion support with CHANGES.rst option
   - Add support for setup.py version command
-  - Adopt twenie for PyPI release/upload
+  - Adopt twine for PyPI release/upload
   - Use README.rst as a long description at PyPI
   - Update some requirements
 

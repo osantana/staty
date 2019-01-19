@@ -56,6 +56,7 @@ setup(
     version=version,
     description='HTTP response and status code handling',
     long_description=get_readme(),
+    long_description_content_type="text/x-rst",
     author="Osvaldo Santana Neto", author_email="staty@osantana.me",
     license="MIT",
     packages=['staty'],
