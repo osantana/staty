@@ -14,16 +14,48 @@
 
 
 import os
+import re
 
-from setuptools import setup
+from setuptools import setup, Command
 
-here = os.path.abspath(os.path.dirname(__file__))
-version = '1.1.0'
+
+def get_readme():
+    with open("README.rst") as readme:
+        return readme.read()
+
+def get_version():
+    version = "0.0.0"
+
+    with open("CHANGES.rst") as changes:
+        for line in changes:
+            version = line.strip()
+            if re.search('^[0-9]+\.[0-9]+(\.[0-9]+)?$', version):
+                break
+
+    return version
+
+
+class VersionCommand(Command):
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        print(version)
+
+
+version = get_version()
+
 
 setup(
     name='staty',
     version=version,
     description='HTTP response and status code handling',
+    long_description=get_readme(),
     author="Osvaldo Santana Neto", author_email="staty@osantana.me",
     license="MIT",
     packages=['staty'],
@@ -48,4 +80,5 @@ setup(
     extras_require={
         'requests': ["requests"],
     },
+    cmdclass={'version': VersionCommand},
 )

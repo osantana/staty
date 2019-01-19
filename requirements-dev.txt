@@ -9,12 +9,12 @@ argh==0.26.2              # via sphinx-autobuild, watchdog
 atomicwrites==1.2.1       # via pytest
 attrs==18.2.0             # via pytest
 babel==2.6.0              # via sphinx
-bumpversion==0.5.3
+bleach==3.1.0             # via readme-renderer
 certifi==2018.11.29       # via requests
 chardet==3.0.4            # via requests
 click==7.0                # via pip-tools
 coverage==4.5.2
-docutils==0.14            # via sphinx
+docutils==0.14            # via readme-renderer, sphinx
 filelock==3.0.10          # via tox
 flake8==3.6.0
 idna==2.8                 # via requests
@@ -27,19 +27,22 @@ more-itertools==5.0.0     # via pytest
 packaging==18.0           # via sphinx
 pathtools==0.1.2          # via sphinx-autobuild, watchdog
 pip-tools==3.2.0
+pkginfo==1.5.0.1          # via twine
 pluggy==0.8.1             # via pytest, tox
 port_for==0.3.1           # via sphinx-autobuild
 py==1.7.0                 # via pytest, tox
 pycodestyle==2.4.0        # via flake8
 pyflakes==2.0.0           # via flake8
-pygments==2.3.1           # via sphinx
+pygments==2.3.1           # via readme-renderer, sphinx
 pyparsing==2.3.1          # via packaging
 pytest-cov==2.6.1
 pytest==4.1.1
 pytz==2018.9              # via babel
 pyyaml==3.13              # via sphinx-autobuild, watchdog
+readme-renderer==24.0     # via twine
+requests-toolbelt==0.8.0  # via twine
 requests==2.21.0
-six==1.12.0               # via livereload, more-itertools, packaging, pip-tools, pytest, sphinx, tox
+six==1.12.0               # via bleach, livereload, more-itertools, packaging, pip-tools, pytest, readme-renderer, sphinx, tox
 snowballstemmer==1.2.1    # via sphinx
 sphinx-autobuild==0.7.1
 sphinx-rtd-theme==0.4.2
@@ -48,6 +51,9 @@ sphinxcontrib-websupport==1.1.0  # via sphinx
 toml==0.10.0              # via tox
 tornado==5.1.1            # via livereload, sphinx-autobuild
 tox==3.7.0
+tqdm==4.29.1              # via twine
+twine==1.12.1
 urllib3==1.24.1           # via requests
 virtualenv==16.2.0        # via tox
 watchdog==0.9.0           # via sphinx-autobuild
+webencodings==0.5.1       # via bleach

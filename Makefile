@@ -13,8 +13,9 @@ clean:
 	-rm -rf dist
 
 release: clean tox
+	git push
+	git push --tags
 	git tag `python setup.py -q version`
-	git push origin `python setup.py -q version`
 	python setup.py sdist upload
 
 update-reqs:

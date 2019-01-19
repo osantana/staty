@@ -1,3 +1,23 @@
+1.1.1
+-----
+
+  - Replace bumpversion support with CHANGES.rst option
+  - Add support for setup.py version command
+  - Adopt twenie for PyPI release/upload
+  - Use README.rst as a long description at PyPI
+  - Update some requirements
+
+1.1.0
+-----
+
+  - Add an HTTPStatus base class for type annotation usage
+
+1.0.0
+-----
+
+  - Refactor status check/test implementation
+  - Add numeric code to status map
+
 0.5.0
 -----
 
