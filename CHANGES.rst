@@ -1,3 +1,8 @@
+1.2.1
+-----
+
+  - Fix an small issue with base HTTPError exception due to lack of status attribute
+
 1.2.0
 -----
 

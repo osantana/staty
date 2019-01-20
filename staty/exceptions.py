@@ -43,6 +43,8 @@ class MissingHandlerException(StatyBaseException):
 
 
 class HTTPError(StatyBaseException):
+    status = None
+
     def __init__(self, *args, response=None, request=None):
         self.response = response
         self.request = request
