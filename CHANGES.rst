@@ -1,3 +1,8 @@
+1.2.0
+-----
+
+  - Add status object in exception objects
+
 1.1.1
 -----
 
