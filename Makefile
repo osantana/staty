@@ -16,6 +16,7 @@ release:
 	git push origin master
 	git push origin master --tags
 	git tag `python setup.py -q version`
+	rm -rf dist/*
 	python setup.py sdist
 	twine check dist/*
 	twine upload dist/*
