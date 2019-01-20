@@ -22,6 +22,7 @@ class HTTPStatusMap:
         self.codes = {}
         self.errors = {}
         self.attribute_names = {}
+        self.exceptions = {}
 
     def __getattr__(self, item):
         try:
@@ -44,6 +45,9 @@ class HTTPStatusMap:
 
         if issubclass(http_status_class, base.ErrorCodeMixin):
             self.errors[code] = http_status
+
+        if hasattr(http_status_class, 'exception'):
+            self.exceptions[http_status_class.exception] = http_status
 
         name = camel2snake(name, upper=True)
 

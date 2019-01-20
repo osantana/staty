@@ -1,3 +1,8 @@
+1.2.2
+-----
+
+  - Fix an circular import issue
+
 1.2.1
 -----
 

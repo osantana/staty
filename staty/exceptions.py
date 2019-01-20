@@ -14,8 +14,9 @@
 
 
 # noinspection PyPep8Naming
-from socket import timeout as SocketTimeout, gaierror as SocketNameResolutionError, herror as SocketHostError
-from .codes import *  # NOQA
+from socket import gaierror as SocketNameResolutionError, herror as SocketHostError, timeout as SocketTimeout
+
+from .status_map import status
 
 
 # Base Exceptions & Mixins
@@ -43,14 +44,16 @@ class MissingHandlerException(StatyBaseException):
 
 
 class HTTPError(StatyBaseException):
-    status = None
-
     def __init__(self, *args, response=None, request=None):
         self.response = response
         self.request = request
         if self.request is None and self.response is not None:
             self.request = getattr(self.response, "request", None)
         super().__init__(*args)
+
+    @property
+    def status(self):
+        return status.exceptions[self.__class__]
 
 
 # Connection Errors
@@ -96,163 +99,163 @@ class UnrecoverableClientErrorException(ClientErrorException, UnrecoverableError
 
 
 class PreconditionRequiredException(UnrecoverableClientErrorException):
-    status = PreconditionRequired()
+    pass
 
 
 class TooManyRequestsException(RecoverableClientErrorException):
-    status = TooManyRequests()
+    pass
 
 
 class BadRequestException(UnrecoverableClientErrorException):
-    status = BadRequest()
+    pass
 
 
 class UnauthorizedException(UnrecoverableClientErrorException):
-    status = Unauthorized()
+    pass
 
 
 class PaymentRequiredException(UnrecoverableClientErrorException):
-    status = PaymentRequired()
+    pass
 
 
 class ForbiddenException(UnrecoverableClientErrorException):
-    status = Forbidden()
+    pass
 
 
 class NotFoundException(UnrecoverableClientErrorException):
-    status = NotFound()
+    pass
 
 
 class MethodNotAllowedException(UnrecoverableClientErrorException):
-    status = MethodNotAllowed()
+    pass
 
 
 class NotAcceptableException(UnrecoverableClientErrorException):
-    status = NotAcceptable()
+    pass
 
 
 class ProxyAuthenticationRequiredException(UnrecoverableClientErrorException):
-    status = ProxyAuthenticationRequired()
+    pass
 
 
 class RequestTimeoutException(RecoverableClientErrorException):
-    status = RequestTimeout()
+    pass
 
 
 class ConflictException(UnrecoverableClientErrorException):
-    status = Conflict()
+    pass
 
 
 class GoneException(UnrecoverableClientErrorException):
-    status = Gone()
+    pass
 
 
 class LengthRequiredException(UnrecoverableClientErrorException):
-    status = LengthRequired()
+    pass
 
 
 class PreconditionFailedException(UnrecoverableClientErrorException):
-    status = PreconditionFailed()
+    pass
 
 
 class PayloadTooLargeException(UnrecoverableClientErrorException):
-    status = PayloadTooLarge()
+    pass
 
 
 class URITooLongException(UnrecoverableClientErrorException):
-    status = URITooLong()
+    pass
 
 
 class UnsupportedMediaTypeException(UnrecoverableClientErrorException):
-    status = UnsupportedMediaType()
+    pass
 
 
 class RangeNotSatisfiableException(UnrecoverableClientErrorException):
-    status = RangeNotSatisfiable()
+    pass
 
 
 class ExpectationFailedException(UnrecoverableClientErrorException):
-    status = ExpectationFailed()
+    pass
 
 
 class IAmATeapotException(UnrecoverableClientErrorException):
-    status = IAmATeapot()
+    pass
 
 
 class MisdirectedRequestException(UnrecoverableClientErrorException):
-    status = MisdirectedRequest()
+    pass
 
 
 class UnprocessableEntityException(UnrecoverableClientErrorException):
-    status = UnprocessableEntity()
+    pass
 
 
 class LockedException(UnrecoverableClientErrorException):
-    status = Locked()
+    pass
 
 
 class FailedDependencyException(UnrecoverableClientErrorException):
-    status = FailedDependency()
+    pass
 
 
 class UpgradeRequiredException(UnrecoverableClientErrorException):
-    status = UpgradeRequired()
+    pass
 
 
 class UnavailableForLegalReasonsException(UnrecoverableClientErrorException):
-    status = UnavailableForLegalReasons()
+    pass
 
 
 class RequestHeaderFieldsTooLargeException(UnrecoverableClientErrorException):
-    status = RequestHeaderFieldsTooLarge()
+    pass
 
 
 class MethodFailureException(UnrecoverableClientErrorException):
-    status = MethodFailure()
+    pass
 
 
 class BlockedByWindowsParentalControlsException(UnrecoverableClientErrorException):
-    status = BlockedByWindowsParentalControls()
+    pass
 
 
 class InvalidTokenException(UnrecoverableClientErrorException):
-    status = InvalidToken()
+    pass
 
 
 class TokenRequiredException(UnrecoverableClientErrorException):
-    status = TokenRequired()
+    pass
 
 
 class RequestHasBeenForbiddenByAntivirusException(UnrecoverableClientErrorException):
-    status = RequestHasBeenForbiddenByAntivirus()
+    pass
 
 
 class LoginTimeoutException(RecoverableClientErrorException):
-    status = LoginTimeout()
+    pass
 
 
 class RetryWithException(RecoverableClientErrorException):
-    status = RetryWith()
+    pass
 
 
 class SSLCertificateErrorException(UnrecoverableClientErrorException):
-    status = SSLCertificateError()
+    pass
 
 
 class SSLCertificateRequiredException(UnrecoverableClientErrorException):
-    status = SSLCertificateRequired()
+    pass
 
 
 class HTTPRequestSentToHTTPSPortException(UnrecoverableClientErrorException):
-    status = HTTPRequestSentToHTTPSPort()
+    pass
 
 
 class NoResponseException(UnrecoverableClientErrorException):
-    status = NoResponse()
+    pass
 
 
 class ClientClosedRequestException(RecoverableClientErrorException):
-    status = ClientClosedRequest()
+    pass
 
 
 # HTTP Server Errors
@@ -263,80 +266,80 @@ class ServerErrorException(HTTPError, RecoverableErrorMixin):
 
 
 class InternalServerErrorException(ServerErrorException):
-    status = InternalServerError
+    pass
 
 
 class NotImplementedException(ServerErrorException):
-    status = NotImplemented()
+    pass
 
 
 class BadGatewayException(ServerErrorException):
-    status = BadGateway()
+    pass
 
 
 class ServiceUnavailableException(ServerErrorException):
-    status = ServiceUnavailable()
+    pass
 
 
 class GatewayTimeoutException(ServerErrorException):
-    status = GatewayTimeout()
+    pass
 
 
 class HTTPVersionNotSupportedException(ServerErrorException):
-    status = HTTPVersionNotSupported()
+    pass
 
 
 class VariantAlsoNegotiatesException(ServerErrorException):
-    status = VariantAlsoNegotiates()
+    pass
 
 
 class InsufficientStorageException(ServerErrorException):
-    status = InsufficientStorage()
+    pass
 
 
 class LoopDetectedException(ServerErrorException):
-    status = LoopDetected()
+    pass
 
 
 class NotExtendedException(ServerErrorException):
-    status = NotExtended()
+    pass
 
 
 class NetworkAuthenticationRequiredException(ServerErrorException):
-    status = NetworkAuthenticationRequired()
+    pass
 
 
 class BandwidthLimitExceededException(ServerErrorException):
-    status = BandwidthLimitExceeded()
+    pass
 
 
 class SiteIsFrozenException(ServerErrorException):
-    status = SiteIsFrozen()
+    pass
 
 
 class InvalidSSLCertificateException(ServerErrorException):
-    status = InvalidSSLCertificate()
+    pass
 
 
 class SSLHandshakeFailedException(ServerErrorException):
-    status = SSLHandshakeFailed()
+    pass
 
 
 class ATimeoutOccurredException(ServerErrorException):
-    status = ATimeoutOccurred()
+    pass
 
 
 class OriginIsUnreachableException(ServerErrorException):
-    status = OriginIsUnreachable()
+    pass
 
 
 class ConnectionTimedOutException(ServerErrorException):
-    status = ConnectionTimedOut()
+    pass
 
 
 class WebServerIsDownException(ServerErrorException):
-    status = WebServerIsDown()
+    pass
 
 
 class UnknownErrorException(ServerErrorException):
-    status = UnknownError()
+    pass
