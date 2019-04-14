@@ -31,7 +31,7 @@ class HTTPStatusMap:
             raise AttributeError("{!r} object has no attribute {!r}".format(self.__class__.__name__, item)) from exc
 
     def __getitem__(self, item):
-            return self.codes[item]
+        return self.codes[item]
 
     def register(self, http_status_class):
         code = http_status_class.code
