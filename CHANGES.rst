@@ -1,3 +1,8 @@
+1.2.3
+-----
+
+  - Update requirements to fix security issues
+
 1.2.2
 -----
 
