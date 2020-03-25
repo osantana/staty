@@ -76,7 +76,7 @@ setup(
         'Topic :: Software Development :: Libraries',
     ],
     url='http://github.com/osantana/staty',
-    download_url=f'https://github.com/osantana/staty/tarball/{version}',
+    download_url='https://github.com/osantana/staty/tarball/{}'.format(version),
     test_suite="tests",
     extras_require={
         'requests': ["requests"],
