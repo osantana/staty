@@ -1,3 +1,10 @@
+1.2.4
+-----
+
+  - Use .format() instead of f-string
+  - Official support only for CPython 3.7 and 3.8
+  - Update requirements
+
 1.2.3
 -----
 
