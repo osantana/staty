@@ -15,7 +15,7 @@ cffi==1.14.0              # via cryptography
 chardet==3.0.4            # via requests
 click==7.1.1              # via pip-tools
 coverage==5.0.4           # via -r requirements-dev.in, pytest-cov
-cryptography==2.8         # via secretstorage
+cryptography==3.2         # via secretstorage
 distlib==0.3.0            # via virtualenv
 docutils==0.16            # via readme-renderer, sphinx
 entrypoints==0.3          # via flake8
