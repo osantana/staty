@@ -83,7 +83,7 @@ pluggy==0.13.1
     #   tox
 port_for==0.3.1
     # via sphinx-autobuild
-py==1.8.1
+py==1.10.0
     # via
     #   pytest
     #   tox
