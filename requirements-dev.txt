@@ -14,7 +14,7 @@ attrs==19.3.0
     # via pytest
 babel==2.8.0
     # via sphinx
-bleach==3.1.4
+bleach==3.3.0
     # via readme-renderer
 certifi==2019.11.28
     # via requests
@@ -66,6 +66,7 @@ more-itertools==8.2.0
     # via pytest
 packaging==20.3
     # via
+    #   bleach
     #   pytest
     #   sphinx
     #   tox
