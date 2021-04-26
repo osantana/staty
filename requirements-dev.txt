@@ -107,7 +107,7 @@ pytest==5.4.1
     #   pytest-cov
 pytz==2019.3
     # via babel
-pyyaml==5.3.1
+pyyaml==5.4
     # via sphinx-autobuild
 readme-renderer==25.0
     # via twine
