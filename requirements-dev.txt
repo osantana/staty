@@ -28,7 +28,7 @@ coverage==5.0.4
     # via
     #   -r requirements-dev.in
     #   pytest-cov
-cryptography==2.8
+cryptography==3.3.2
     # via secretstorage
 distlib==0.3.0
     # via virtualenv
